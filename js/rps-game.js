@@ -11,7 +11,15 @@ $(document).ready(function(){
 
   var myStrings = ["rock", "paper","scissors"];
 
-  $("#startButton").on("clic")
+  $("#resetButton").on("click",function(){
+    scoreTracker.gameState.userScore = 0;
+    scoreTracker.gameState.opponentScore = 0;
+    scoreTracker.gameState.gameRound = 0;
+    $("#userScore").html(scoreTracker.gameState.userScore);
+    $("#opponentScore").html(scoreTracker.gameState.opponentScore);
+    $("#gameRound").html(scoreTracker.gameState.gameRound);
+    $("#parentPanelHeader").html("Rock-Paper-Scissors Game !!!").css ("color","black"); 
+  }); //Reset will initialize the global variables and update html tags in the app.
   
   $(".btn-default").on("click",function(){
 
@@ -23,50 +31,52 @@ $(document).ready(function(){
 
     console.log("computer choice :"+computerChoice+"User Choice :" +userChoice);
 
+    /* The game has only three possible outcomes other than a tie: a player who decides to play rock 
+    will beat another player who has chosen scissors ("rock crushes scissors") but will lose to one 
+    who has played paper ("paper covers rock"); a play of paper will lose to a play of scissors 
+    ("scissors cut paper"). If both players throw the same shape, the game is tied and is usually 
+    immediately replayed to break the tie. */
+
     if (computerChoice === "rock"){
         switch (userChoice) {
-            case "rock" :
-              $("#parentPanelHeader").html("This is a Tie !!").css ("color","red");
+            case "rock" : itIsATie();
               break;
-            case "scissors" :
-              $("#parentPanelHeader").html("Computer Wins!!").css ("color","red"); 
-              $("#opponentScore").html(++scoreTracker.gameState.opponentScore);
+            case "scissors" : computerWon();
               break;
-            case "paper" :
-              $("#parentPanelHeader").html("You Win!!").css ("color","red"); 
-              $("#userScore").html(++scoreTracker.gameState.userScore);
+            case "paper" : youWon();
               break;
           }
         } else if (computerChoice === "paper") {
           switch (userChoice) {
-            case "rock" :
-              $("#parentPanelHeader").html("Computer Wins!!").css ("color","red"); 
-              $("#opponentScore").html(++scoreTracker.gameState.opponentScore);
+            case "rock" : computerWon();
               break;
-            case "paper" :
-              $("#parentPanelHeader").html("This is a Tie !!").css ("color","red");
+            case "paper" : itIsATie();
               break;
-            case "scissors" :
-              $("#parentPanelHeader").html("You Win!!").css ("color","red"); 
-              $("#userScore").html(++scoreTracker.gameState.userScore);
+            case "scissors" : youWon();
               break;
           }
         } else if (computerChoice === "scissors") {
           switch (userChoice) {
-            case "rock" :
-              $("#parentPanelHeader").html("You Win!!").css ("color","red"); 
-              $("#userScore").html(++scoreTracker.gameState.userScore);
+            case "rock" : youWon();
               break;
-            case "paper" :
-              $("#parentPanelHeader").html("Computer Wins!!").css ("color","red"); 
-              $("#opponentScore").html(++scoreTracker.gameState.opponentScore);
+            case "paper" : computerWon();
               break;
-            case "scissors" :
-              $("#parentPanelHeader").html("This is a Tie !!").css ("color","red");
+            case "scissors" : itIsATie(); 
               break;
           }
         }
 
+    function youWon(){
+        $("#parentPanelHeader").html("You Win!!").css ("color","red"); 
+        $("#userScore").html(++scoreTracker.gameState.userScore);
+    }
+    function computerWon() {
+        $("#parentPanelHeader").html("Computer Wins!!").css ("color","red"); 
+        $("#opponentScore").html(++scoreTracker.gameState.opponentScore);
+    }
+    function itIsATie() {
+      $("#parentPanelHeader").html("This is a Tie !!").css ("color","red");
+    }
   });
 
 });
