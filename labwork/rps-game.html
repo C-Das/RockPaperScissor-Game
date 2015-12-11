@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPS Game</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+      <br />
+        <button class="btn btn-info" id="changeText">Change Text</button>
+      </div>
+      <div class="col-md-4">
+        <span id="addText"></span>
+      </div>
+    </div> 
+    <br />
+    <br />
+    <div class="row">
+      <div class="col-md-3">
+        <strong> User Score : </strong><span id="userScore">0</span>
+        <button class="btn btn-block" id="userScore">User Score</button>
+      </div>
+      <div class="col-md-3">
+        <strong> Opponent Score : </strong><span id="opponentScore">0</span>
+        <button class="btn btn-block" id="opponentScore">Opponent Score</button>
+      </div>
+      <div class="col-md-3">
+        <strong> Rounds : </strong><span id="roundScore">1</span>
+        <button class="btn btn-block" id="roundScore">Rounds</button>
+      </div>
+    </div> 
+    <br />
+      <div class="col-md-3">
+        <button class="btn btn-block" id="clickToPlay">Click To Play</button>
+      </div>    
+  </div>
+      <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Take User Input</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Enter Your Choice (R/P/S)</label>
+                <input type="text" class="form-control" id="userInputValue" placeholder="Enter your value">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="userPlay">Play</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/rps-game.js"></script>
+</body>
+</html>
