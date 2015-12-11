@@ -11,6 +11,15 @@ $(document).ready(function(){
 
   var myStrings = ["rock", "paper","scissors"];
 
+  $("#childPanel").hide(); // Hides the game panel at the page load.
+
+  $("#startButton").on ("click",function(){
+    
+    $("#headerPanelJumbotron").hide(); 
+    $("#childPanel").show(); //Improve to show slowly
+  
+  }); // Clicking on "Start", loads the Game Panel.
+
   $("#resetButton").on("click",function(){
     scoreTracker.gameState.userScore = 0;
     scoreTracker.gameState.opponentScore = 0;
@@ -19,6 +28,8 @@ $(document).ready(function(){
     $("#opponentScore").html(scoreTracker.gameState.opponentScore);
     $("#gameRound").html(scoreTracker.gameState.gameRound);
     $("#parentPanelHeader").html("Rock-Paper-Scissors Game !!!").css ("color","black"); 
+    $("#childPanel").hide();
+    $("#headerPanelJumbotron").show(); 
   }); //Reset will initialize the global variables and update html tags in the app.
   
   $(".btn-default").on("click",function(){
