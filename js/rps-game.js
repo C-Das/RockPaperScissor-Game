@@ -15,21 +15,51 @@ $(document).ready(function(){
 
   $("#startButton").on ("click",function(){
     
-    $("#headerPanelJumbotron").hide(); 
-    $("#childPanel").show(); //Improve to show slowly
+    var startButtonDataState= $(this).data("state");
+
+    console.log(startButtonDataState);
+
+    if (startButtonDataState === "start") {
+      $("#headerPanelJumbotron").hide(); 
+      $("#childPanel").show(); //Improve to show slowly
+      $(this).html("Stop");
+      $(this).data("state","stop");
+    } else {
+      $("#childPanel").hide();
+      $(this).html("Start");
+      $(this).data("state","start");
+      $("#parentPanelHeader").empty(); 
+      $("#headerPanelJumbotron").show();
+      if( scoreTracker.gameState.userScore === scoreTracker.gameState.opponentScore) {
+        $("#h3HeaderPanel").html("The Game is a Tie !!").css("color","red");
+      } else if (scoreTracker.gameState.userScore > scoreTracker.gameState.opponentScore) {
+        $("#h3HeaderPanel").html("You own the Game !!").css("color","red");        
+      } else {
+        $("#h3HeaderPanel").html("Computer own the Game !!").css("color","red");
+      }
+    }
   
   }); // Clicking on "Start", loads the Game Panel.
 
+  function resetScores(){
+      scoreTracker.gameState.userScore = 0;
+      scoreTracker.gameState.opponentScore = 0;
+      scoreTracker.gameState.gameRound = 0;
+    } //Need to understand if i define the function at the end why it is giving error ??
+
+
   $("#resetButton").on("click",function(){
-    scoreTracker.gameState.userScore = 0;
-    scoreTracker.gameState.opponentScore = 0;
-    scoreTracker.gameState.gameRound = 0;
+    resetScores();
     $("#userScore").html(scoreTracker.gameState.userScore);
     $("#opponentScore").html(scoreTracker.gameState.opponentScore);
     $("#gameRound").html(scoreTracker.gameState.gameRound);
-    $("#parentPanelHeader").html("Rock-Paper-Scissors Game !!!").css ("color","black"); 
+    $("#parentPanelHeader").html("Rock-Paper-Scissors Game !!!").css ("color","black");
+    $("#h3HeaderPanel").html("Welcome To Chinmay's Rock-Paper-Scissors Game !! !!").css ("color","black"); 
     $("#childPanel").hide();
-    $("#headerPanelJumbotron").show(); 
+    $("#headerPanelJumbotron").show();
+    $("#childPanelBody").empty();
+    $("#startButton").html("Start");
+    $("#startButton").data("state","start");
   }); //Reset will initialize the global variables and update html tags in the app.
   
   $(".btn-default").on("click",function(){
@@ -40,6 +70,7 @@ $(document).ready(function(){
     var computerChoice = myStrings[randomIndex];
     var userChoice = $(this).data("tag");
 
+    $("#childPanelBody").html ("<strong>Your Choose :</strong>"+userChoice+"<br><strong>Computer Choose :</strong>"+computerChoice);
     console.log("computer choice :"+computerChoice+"User Choice :" +userChoice);
 
     /* The game has only three possible outcomes other than a tie: a player who decides to play rock 
@@ -78,16 +109,17 @@ $(document).ready(function(){
         }
 
     function youWon(){
-        $("#parentPanelHeader").html("You Win!!").css ("color","red"); 
+        $("#parentPanelHeader").html("You Won this Round!!").css ("color","red"); 
         $("#userScore").html(++scoreTracker.gameState.userScore);
     }
     function computerWon() {
-        $("#parentPanelHeader").html("Computer Wins!!").css ("color","red"); 
+        $("#parentPanelHeader").html("Computer Won this Round!!").css ("color","red"); 
         $("#opponentScore").html(++scoreTracker.gameState.opponentScore);
     }
     function itIsATie() {
-      $("#parentPanelHeader").html("This is a Tie !!").css ("color","red");
+      $("#parentPanelHeader").html("This is a Tie in this Round!!").css ("color","red");
     }
+
   });
 
 });
