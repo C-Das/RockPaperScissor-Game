@@ -1,1 +1,1 @@
-<?php require('rps-game.html'); ?>
+<?php require('rps-game-home.html'); ?>

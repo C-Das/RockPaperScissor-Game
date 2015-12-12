@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RPS Game Home</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/rps-game.css">
+  <link rel="stylesheet" type="text/css" href="css/animations.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">Rock-Paper-Scissors Game !!</div>
+          <div class="panel-body">
+            <div class="jumbotron" id="headerHomeJumbotron">
+              <h3 id="h3HomePanel">Welcome To Chinmay's Rock-Paper-Scissors Game !!</h3>
+              <p id="homePaneltext">Click options below to start the Game.</p>
+              <button type="button" class="btn btn-primary btn-lg btn-block" id="playComputerButton" onclick=" location.href='rps-game-computer.html'">Play with Computer</button>
+              <button type="button" class="btn btn-info btn-lg btn-block" id="playFriendButton">Play with your Friend</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" id="playFriendButton">Play Online</button>
+            </div>  
+          </div>
+          <div class="panel-footer" it="parentPanelFooter">
+              <form class="form-inline" id="playerNames">
+                <div class="form-group">
+                  <label for="exampleInputName2">First Player</label>
+                  <input type="text" class="form-control" id="firstPlayer" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputName2">Second Player</label>
+                  <input type="text" class="form-control" id="firstPlayer" placeholder="John Smith">
+                </div>
+                <button type="submit" class="btn btn-default">Play</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script type="text/javascript" src="js/rps-game-home.js"></script>
+</body>
+</html>

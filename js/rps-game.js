@@ -33,19 +33,13 @@ $(document).ready(function(){
       if( scoreTracker.gameState.userScore === scoreTracker.gameState.opponentScore) {
         $("#h3HeaderPanel").html("The Game is a Tie !!").css("color","red");
       } else if (scoreTracker.gameState.userScore > scoreTracker.gameState.opponentScore) {
-        $("#h3HeaderPanel").html("You own the Game !!").css("color","red");        
+        $("#h3HeaderPanel").html("You won the Game !!").css("color","red");        
       } else {
-        $("#h3HeaderPanel").html("Computer own the Game !!").css("color","red");
+        $("#h3HeaderPanel").html("Computer won the Game !!").css("color","red");
       }
     }
   
   }); // Clicking on "Start", loads the Game Panel.
-
-  function resetScores(){
-      scoreTracker.gameState.userScore = 0;
-      scoreTracker.gameState.opponentScore = 0;
-      scoreTracker.gameState.gameRound = 0;
-    } //Need to understand if i define the function at the end why it is giving error ??
 
 
   $("#resetButton").on("click",function(){
@@ -122,4 +116,9 @@ $(document).ready(function(){
 
   });
 
+  function resetScores(){
+      scoreTracker.gameState.userScore = 0;
+      scoreTracker.gameState.opponentScore = 0;
+      scoreTracker.gameState.gameRound = 0;
+    } //Need to understand if i define the function at the end why it is giving error ??
 });
