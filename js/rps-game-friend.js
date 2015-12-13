@@ -1,22 +1,35 @@
+window.youAndFriend = {
+
+  scoreCard : {
+    yourScore : 0 ,
+    friendScore : 0 ,
+    gameRound : 0 
+  }
+}
+
 $(document).ready(function(){
 
-  var user1GameInput, user2GameInput, formInput;
+  var user1GameInput, user2GameInput, formInput,numberRounds;
 
   $("#friendStartButton").on("click",function(){
-    $("#user1Gameform").show();
+    $("#numberRoundsForm").show();
+    $("#user1Gameform").hide();
     $("#user2Gameform").hide();
     $("#gameInputModal").modal('show');
   });
 
   $(".form-control").on("focusout",function(){
     formInput = $(this).val().toUpperCase();
+    formId = $(this).attr("id");
+
+    console.log ("form id is :"+formId);
 
     var disabledState = $("#startGameWithFriend").attr("disabled");
 
-    if (!validateInput(formInput)) {
+    if (!validateInput(formInput) && formId != "numberRounds") {
       $("#modalMessage").html("The value should be 'Rock' or 'Paper' or 'Scissors'. Please enter again.")
         .css("color","red")
-        .css("text-align","left");
+        .css("text-align","left");    
     } else {
 
       $("#modalMessage").empty();
@@ -28,23 +41,34 @@ $(document).ready(function(){
 
   });
 
-  startGameWithFriend
-
   $("#startGameWithFriend").on("click",function(){
     var dataTag = $("#startGameWithFriend").data("tag");
-    
+
     console.log("Data Tag :"+dataTag);
+
+    $("#startGameWithFriend").attr("disabled","disabled"); //Added to make sure Hit is not enabled until friend's input is proper
     
-    if (dataTag === "userInput"){
+    if (dataTag === "numberRounds"){
+      numberRounds = $("#numberRounds").val();
+      $("#numberRoundsForm").hide();
+      $("#user1Gameform").show();
+      $("#user2Gameform").hide();
+      $("#startGameWithFriend").html("Enter Your Choice!!");
+      $("#startGameWithFriend").data("tag","yourInput");
+
+    } else if (dataTag === "yourInput"){
       $("#user1Gameform").hide();
       $("#user2Gameform").show();
-      $("#startGameWithFriend").html("Hit to Decide!!");
+      $("#startGameWithFriend").html("Enter Your Friend's Choice!!");
       $("#startGameWithFriend").data("tag","hitToResult");
       user1GameInput = $("#user1GameInput").val().toUpperCase();
     } else {     
       user2GameInput = $("#user2GameInput").val().toUpperCase();
+      $("#startGameWithFriend").html("Enter Your Choice!!");
+      $("#startGameWithFriend").data("tag","yourInput");
       console.log("User1 Input:"+user1GameInput+"User 2 Game Input :"+user2GameInput);
       decideWinner(user1GameInput,user2GameInput);
+      $("#gameInputModal").modal('hide');
     }
 
   });
@@ -75,44 +99,52 @@ $(document).ready(function(){
     ("scissors cut paper"). If both players throw the same shape, the game is tied and is usually 
     immediately replayed to break the tie. */
 
-    if (yourInput === "rock"){
+    if (yourInput === "ROCK"){
         switch (friendInput) {
-            case "rock" : itIsATie();
+            case "ROCK" : itIsATie();
               break;
-            case "scissors" : youWon();
+            case "SCISSORS" : youWon();
               break;
-            case "paper" : friendWon();
-              break;
-          }
-        } else if (yourInput === "paper") {
-          switch (friendInput) {
-            case "rock" : youWon();
-              break;
-            case "paper" : itIsATie();
-              break;
-            case "scissors" : friendWon();
+            case "PAPER" : friendWon();
               break;
           }
-        } else if (yourInput === "scissors") {
+        } else if (yourInput === "PAPER") {
           switch (friendInput) {
-            case "rock" : friendWon();
+            case "ROCK" : youWon();
               break;
-            case "paper" : youWon();
+            case "PAPER" : itIsATie();
               break;
-            case "scissors" : itIsATie(); 
+            case "SCISSORS" : friendWon();
+              break;
+          }
+        } else if (yourInput === "SCISSORS") {
+          switch (friendInput) {
+            case "ROCK" : friendWon();
+              break;
+            case "PAPER" : youWon();
+              break;
+            case "SCISSORS" : itIsATie(); 
               break;
           }
         }
     function youWon(){
-        $("#h3yourHeaderPanel").val("You Won this Round!!").css ("color","red"); 
+        $("#h3YourHeaderPanel").html("You Won this Round!!").css ("color","red");
+        $("#h3FriendHeaderPanel").html("Friend Lost!!").css ("color","red");
+        $("#pYourHeaderPanel").html("Your Choice was :"+yourInput).css ("color","blue");
+        $("#pFriendHeaderPanel").html("Your Friend's Choice was :"+friendInput).css ("color","blue");
         //$("#userScore").html(++scoreTracker.gameState.userScore);
     }
     function friendWon() {
-        $("#h3FriendHeaderPanel").val("Computer Won this Round!!").css ("color","red"); 
+        $("#h3FriendHeaderPanel").html("Friend Won this Round!!").css ("color","red"); 
+        $("#h3YourHeaderPanel").html("You Lost!!").css ("color","red");
+        $("#pYourHeaderPanel").html("Your Choice was :"+yourInput).css ("color","blue");
+        $("#pFriendHeaderPanel").html("Your Friend's Choice was :"+friendInput).css ("color","blue");
         //$("#opponentScore").html(++scoreTracker.gameState.opponentScore);
     }
     function itIsATie() {
-      $("#h3yourHeaderPanel,#h3FriendHeaderPanel").val("This is a Tie in this Round!!").css ("color","red");
+      $("#h3YourHeaderPanel,#h3FriendHeaderPanel").html("This is a Tie in this Round!!").css ("color","red");
+      $("#pYourHeaderPanel").html("Your Choice was :"+yourInput).css ("color","blue");
+      $("#pFriendHeaderPanel").html("Your Friend's Choice was :"+friendInput).css ("color","blue");
     }  
   }
 });
