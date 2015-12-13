@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPS Game</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <link rel="stylesheet" type="text/css" href="css/rps-game.css">
+     <link rel="stylesheet" type="text/css" href="css/animations.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-5">  
+        <div class="panel panel-default" id="parentPanel">
+          <div class="panel-heading">
+              <button type="button" class="btn btn-info btn-sm pull-right" id="btnHome" onclick=" location.href='rps-game-home.html'">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home
+              </button>
+              <h3 class="panel-title" id="parentPanelHeader">Rock-Paper-Scissors Game !!!</h3>
+          </div>
+          <div class="panel-body">
+            <div class="jumbotron" id="headerPanelJumbotron">
+              <h3 id="h3HeaderPanel">Welcome To Chinmay's Rock-Paper-Scissors Game !!</h3>
+              <p>Click "Start" to start the game.</p>
+            </div>          
+            <div class="panel panel-default" id="childPanel">
+              <div class="panel-heading">
+                <strong> User Score : </strong><span id="userScore">0</span> <br> 
+                <strong> Computer Score : </strong><span id="opponentScore">0</span> <br \>
+                <strong> Game Round : </strong><span id="gameRound">0</span> 
+              </div>
+              <div class="panel-body" id="childPanelBody">
+              
+              </div>
+              <div class="panel-footer" id="childPanelFooter">
+                <button class="btn btn-default" type="submit" id="rockButton" data-tag="rock">Rock<br>
+                  <i class="fa fa-hand-rock-o fa-5x"></i>
+                </button> 
+                <button class="btn btn-default" type="submit" id="paperButton" data-tag="paper">Paper <br>
+                  <i class="fa fa-hand-paper-o fa-5x"></i>
+                </button>               
+                <button class="btn btn-default" type="submit" id="scissorsButton" data-tag="scissors">Scissors<br>
+                  <i class="fa fa-hand-scissors-o fa-5x"></i>
+                </button> 
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer" it="parentPanelFooter">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="startButton" data-state="start">Start</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="resetButton">Reset</button>
+          </div>
+        </div>
+      </div>      
+    </div>    
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/rps-game.js"></script>
+</body>
+</html>

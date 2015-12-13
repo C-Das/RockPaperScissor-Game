@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RPS with Friend</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/rps-game.css">
+  <link rel="stylesheet" type="text/css" href="css/animations.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <button type="button" class="btn btn-info btn-sm pull-right" id="btnHome" onclick=" location.href='rps-game-home.html'">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home
+              </button>
+              <h3 class="panel-title" id="friendParentPanelHeader">Rock-Paper-Scissors Game !!!</h3>
+          </div>
+          <div class="panel-body">
+            <div class="jumbotron" id="friendHeaderGamePanelJumbotron">
+              <h3 id="h3yourHeaderPanel">Welcome <span id="friendUser1Name"></span>to the Rock-Paper-Scissors Game !!</h3>
+              <p>Click "Start" to start the game.</p>
+            </div>          
+          </div>
+          <div class="panel-footer" it="parentPanelFooter">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2" id="buttonPanel">
+          <button type="button" class="btn btn-primary btn-lg btn-block " id="friendStartButton" data-state="start" >Start</button>
+          <button type="button" class="btn btn-danger btn-lg btn-block" id="friendResetButton" disabled="disabled">Reset</button>
+      </div>
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <button type="button" class="btn btn-info btn-sm pull-right" id="btnHome" onclick=" location.href='rps-game-home.html'">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home
+              </button>
+              <h3 class="panel-title" id="parentPanelHeader">Rock-Paper-Scissors Game !!!</h3>
+          </div>
+          <div class="panel-body">
+            <div class="jumbotron" id="headerPanelJumbotron">
+              <h3 id="h3FriendHeaderPanel">Welcome <span id="friendUser2Name"></span>to the Rock-Paper-Scissors Game !!</h3>
+              <p>Click "Start" to start the game.</p>
+            </div>          
+          </div>
+          <div class="panel-footer" it="parentPanelFooter">
+          </div>    
+        </div>
+      </div>      
+    </div>    
+  </div>
+    <!-- Modal -->
+  <div class="modal fade" id="gameInputModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Game Input !! </h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group" id="user1Gameform">
+              <label for="exampleInputPassword1">Your Input</label>
+              <input type="password" class="form-control" id="user1GameInput" placeholder="Your Input">
+            </div>
+            <div class="form-group" id="user2Gameform">
+              <label for="exampleInputPassword1">Your Friend's Input</label>
+              <input type="password" class="form-control" id="user2GameInput" placeholder="Friend's Input">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <p id="modalMessage"></p>
+          <button type="button" class="btn btn-primary" id="startGameWithFriend" data-tag="userInput" disabled="disabled">Another User Input</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script type="text/javascript" src="js/rps-game-friend.js"></script>
+  <script type="text/javascript" src="js/rps-game.js"></script>
+</body>
+</html>
