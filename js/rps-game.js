@@ -120,5 +120,5 @@ $(document).ready(function(){
       scoreTracker.gameState.userScore = 0;
       scoreTracker.gameState.opponentScore = 0;
       scoreTracker.gameState.gameRound = 0;
-    } //Need to understand if i define the function at the end why it is giving error ??
+    } 
 });

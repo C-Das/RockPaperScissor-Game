@@ -1,9 +1,24 @@
-$(document).ready(function(){
+window.userNames = {
+    user1Name : "" ,
+    user2Name : "" 
+}
+$(document).ready(function(){ 
 
-    $("#playerNames").hide();
-    
     $("#playFriendButton").on("click",function(){
-        $("#playComputerButton,#playFriendButton").hide();
-        $("#playerNames").show();
+      $("#myModal").modal('show');
     });
+
+    $("#startGameWithFriend").on("click",function(){
+
+      user1Name = $("#user1Name").val();
+      user2Name = $("#user2Name").val();
+
+      //$(document).load("rps-game-friend.html"); // This is giving syntax error
+      
+      $("#friendUser1Name").html("userNames.user1Name"); //Issue - Not able to copy the names to secod HTML 
+      $("#friendUser2Name").html("userNames.user2Name");
+      
+      //console.log("User1:"+user1Name+"User2 :"+user2Name);
+    });
+
 });
