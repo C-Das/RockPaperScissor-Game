@@ -9,6 +9,18 @@ window.youAndFriend = {
 
 $(document).ready(function(){
 
+  var myFBRef = new Firebase("https://intense-inferno-5737.firebaseIO.com/");
+
+    var userRef = myFBRef.child("scoreTracker");
+
+    userRef.set ({
+      gameState : {
+        Name :"Chinmay",
+        Score :"0",
+        noOfRoundsPlayed :"0",
+      },
+    });
+
   var user1GameInput, user2GameInput, formInput,numberRounds;
 
   $("#friendStartButton").on("click",function(){
