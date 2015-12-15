@@ -1,5 +1,4 @@
 window.youAndFriend = {
-
   scoreCard : {
     yourScore : 0 ,
     friendScore : 0 ,
@@ -21,13 +20,42 @@ $(document).ready(function(){
       },
     });
 
-  var user1GameInput, user2GameInput, formInput,numberRounds;
+  var user1GameInput, user2GameInput, gameRound=0,formInput,numberRounds;
 
   $("#friendStartButton").on("click",function(){
-    $("#numberRoundsForm").show();
-    $("#user1Gameform").hide();
-    $("#user2Gameform").hide();
-    $("#gameInputModal").modal('show');
+    
+    var dataState = $(this).data("state");
+
+    //console.log("Data State"+dataState);
+
+    if (dataState === "start"){
+      $("#numberRoundsForm").show();
+      $("#user1Gameform").hide();
+      $("#user2Gameform").hide();
+      $("#gameInputModal").modal('show'); 
+      $(this).html("Next");
+      $(this).data("state","next");
+    } else if (dataState === "next") {
+       
+        $("#user1GameInput").val("");
+        $("#user2GameInput").val("");
+
+        if (gameRound < numberRounds) {
+          $("#user1Gameform").show();
+          $("#user2Gameform").hide();
+          $("#gameInputModal").modal('show'); 
+        } else {
+          $("#h3YourHeaderPanel").html("");
+          $("#pYourHeaderPanel").html("Game is over!!. Please click 'start' to start the game again ")
+            .append ("and your score is :"+youAndFriend.scoreCard.yourScore);
+          $("#h3FriendHeaderPanel").html("");
+          $("#pFriendHeaderPanel").html("Game is over!!. Please click 'start' to start the game again ")
+            .append ("and your score is :"+youAndFriend.scoreCard.friendScore);
+          $(this).html("Start");
+          $(this).data("state","start");
+          resetScores(); //Reset all scores
+        } 
+    }
   });
 
   $(".form-control").on("focusout",function(){
@@ -77,7 +105,7 @@ $(document).ready(function(){
     } else {     
       user2GameInput = $("#user2GameInput").val().toUpperCase();
       $("#startGameWithFriend").html("Enter Your Choice!!");
-      $("#startGameWithFriend").data("tag","yourInput");
+      $("#startGameWithFriend").data("tag","numberRounds");
       console.log("User1 Input:"+user1GameInput+"User 2 Game Input :"+user2GameInput);
       decideWinner(user1GameInput,user2GameInput);
       $("#gameInputModal").modal('hide');
@@ -105,6 +133,7 @@ $(document).ready(function(){
 
     console.log("Inside decideWinner function. your Input :"+yourInput+"friend Input :"+friendInput);
 
+    
     /* The game has only three possible outcomes other than a tie: a player who decides to play rock 
     will beat another player who has chosen scissors ("rock crushes scissors") but will lose to one 
     who has played paper ("paper covers rock"); a play of paper will lose to a play of scissors 
@@ -144,19 +173,26 @@ $(document).ready(function(){
         $("#h3FriendHeaderPanel").html("Friend Lost!!").css ("color","red");
         $("#pYourHeaderPanel").html("Your Choice was :"+yourInput).css ("color","blue");
         $("#pFriendHeaderPanel").html("Your Friend's Choice was :"+friendInput).css ("color","blue");
-        //$("#userScore").html(++scoreTracker.gameState.userScore);
+        youAndFriend.scoreCard.yourScore++;
     }
     function friendWon() {
         $("#h3FriendHeaderPanel").html("Friend Won this Round!!").css ("color","red"); 
         $("#h3YourHeaderPanel").html("You Lost!!").css ("color","red");
         $("#pYourHeaderPanel").html("Your Choice was :"+yourInput).css ("color","blue");
         $("#pFriendHeaderPanel").html("Your Friend's Choice was :"+friendInput).css ("color","blue");
-        //$("#opponentScore").html(++scoreTracker.gameState.opponentScore);
+        youAndFriend.scoreCard.friendScore++;
     }
     function itIsATie() {
       $("#h3YourHeaderPanel,#h3FriendHeaderPanel").html("This is a Tie in this Round!!").css ("color","red");
       $("#pYourHeaderPanel").html("Your Choice was :"+yourInput).css ("color","blue");
       $("#pFriendHeaderPanel").html("Your Friend's Choice was :"+friendInput).css ("color","blue");
     }  
+
+    gameRound++; //Increases the gameRound 
   }
+    function resetScores(){
+      youAndFriend.scoreCard.yourScore = 0;
+      youAndFriend.scoreCard.friendScore = 0;
+      youAndFriend.scoreCard.gameRound = 0;
+    } 
 });
